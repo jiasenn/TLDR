@@ -1,3 +1,8 @@
+import pandas as pd
+import shutil
+import os
+import random
+
 def move(set_name):
     # path='../input/retinal-disease-classification/'+set_name+'_Set/'+set_name+'_Set/'
     path=set_name+'_Set/'+set_name+'_Set/'
