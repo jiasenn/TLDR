@@ -96,5 +96,7 @@ def trainModel():
     # plt.savefig('6585-cm.svg', format='svg')
     # plt.show()
 
+    return history
+
 if __name__ == '__main__':
     trainModel()
