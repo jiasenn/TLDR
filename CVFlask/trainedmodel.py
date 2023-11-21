@@ -7,9 +7,12 @@ from tqdm import tqdm
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.applications.resnet50 import preprocess_input
 from keras.models import load_model
+from buildModel import *
 
-model = load_model("RetinalDiseaseCNN.h5")  
+# model = load_model("RetinalDiseaseCNN.h5")
 labels = ['glaucoma','cataract','normal','diabetic_retinopathy']
+model = buildModel(len(labels))
+model.load_weights('../checkpoint/cp.ckpt')
 
 # load image
 def loadimage(test):

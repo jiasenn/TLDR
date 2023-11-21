@@ -1,4 +1,5 @@
 # Import libraries
+import os
 from buildDataset import *
 from buildModel import *
 from keras.callbacks import EarlyStopping, ModelCheckpoint
@@ -10,13 +11,16 @@ def trainModel():
     model = buildModel(num_classes)
 
     # Define checkpoint
-    filepath = "RetinalDiseaseCNN.h5"
-    model_checkpoint = ModelCheckpoint(filepath, 
-                                    save_best_only=True, 
-                                    save_weights_only=False, 
-                                    monitor='val_accuracy', 
-                                    mode='max', 
-                                    verbose=1)
+    # filepath = "RetinalDiseaseCNN.h5"
+    checkpoint_path = "checkpoint/cp.ckpt"
+    checkpoint_dir = os.path.dirname(checkpoint_path)
+
+    model_checkpoint = ModelCheckpoint(checkpoint_path,
+                                       save_best_only=True,
+                                       save_weights_only=True, 
+                                       monitor='val_accuracy', 
+                                       mode='max', 
+                                       verbose=1)
 
     # Define early stopping
     early_stopping = EarlyStopping(monitor='val_accuracy', 
