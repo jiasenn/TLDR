@@ -1,9 +1,32 @@
-<html>
-   <body>
-      <form action = "http://localhost:5000/preview" method = "POST" 
-         enctype = "multipart/form-data">
-         <input type = "file" name = "file" />
-         <input type = "submit"/>
-      </form>   
-   </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/styles.css') }}">
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Project TLDR</title>
+</head>
+<body>
+   <div class="topnav">
+      <p> <b> Term 7 CV: Ocular Disease Recognition </b> </p>
+   </div> 
+   <div class="blue-box">
+      <div style="flex-basis: 20%; flex-grow: 1;">
+         <img src="{{ url_for('static',filename='images/eyedoctor.png') }}" alt="PNG Designed By CHENXIN from https://pngtree.com/freepng/eye-treatment-blue-ophthalmology-eye-chart-doctor-examines-eyes_6689805.html?sol=downref&id=bef" class="center"/>
+      </div>
+      <div style="flex-basis: 20%; flex-grow: 2; padding: 1em;">
+         <p>Singapore is an aging society where ocular diseases such as diabetic retinopathy, glaucoma and age-related macular degeneration are becoming more commonplace. </p>
+         <p>As such, our group has designed a computer vision model to provide predictions on the possibility of the aforementioned conditions in order to propose the digitization and the streamlining of eye diagnosis processes, hence making it more convenient for people to screen their eye health. </p>
+         <p> Try it out below! </p>
+         <div class="box" style="padding: 1em;">
+            <form action = "http://localhost:5000/predict" method = "POST" 
+               enctype = "multipart/form-data">
+               <label for="file">Select a file:</label>
+               <input type="file" name="file" accept=".jpg, .jpeg, .png" style="font-size: 24px; font-family: sans-serif;"/> 
+               <input type = "submit" style="font-size: 20px"/>
+            </form>
+         </div>
+      </div>
+   </div>            
+</body>
 </html>

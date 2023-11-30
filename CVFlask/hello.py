@@ -4,35 +4,36 @@ from flask import flash, request, redirect, url_for
 from werkzeug.utils import secure_filename
 from pathlib import Path
 import trainedmodel as tm
+import os
 
-UPLOAD_FOLDER = 'C:/Users/earth/Downloads/Workspace/CVFlask/uploads/'
+UPLOAD_FOLDER = 'static/temp/'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # home page
-@app.route('/')
+@app.route('/', methods = ['GET', 'POST'])
 def upload_files():
+   # remove files
+   for filename in os.listdir(UPLOAD_FOLDER):
+      os.remove(os.path.join(UPLOAD_FOLDER, filename))
    return render_template('upload.html')
-
-# upload file
-@app.route('/preview', methods = ['GET', 'POST'])
-def upload_file():
-   if request.method == 'POST':
-      f = request.files['file']
-      f.save(os.path.join(app.config['UPLOAD_FOLDER'], f.filename))
-      return render_template('preview.html', id=f.filename)
 
 # view model predictions on file
 @app.route('/predict', methods = ['GET', 'POST'])
-def preview_file():
-    test = Path('./uploads')
-    image = tm.loadimage(test)
-    output = tm.predictimage(image)
-    return render_template('predict.html', output=output)
-    
-
+def predict():
+   if request.method == 'POST':
+      files = request.files.getlist("file") 
+      # save files
+      for f in files: 
+         pth = os.path.join(app.config['UPLOAD_FOLDER'], f.filename)
+         f.save(pth)
+      test = Path('./static/temp/')
+      image = tm.loadimage(test)
+      output = tm.predictimage(image)     
+      return render_template('predict.html', output=output, file=pth)
+   
 if __name__ == '__main__':
    app.run(debug = True)
 

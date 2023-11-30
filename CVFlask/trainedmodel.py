@@ -2,17 +2,16 @@ import numpy as np
 import pandas as pd
 from tensorflow import keras
 from tqdm import tqdm
+import os
+import sys
 
 # Import libraries for model
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.applications.resnet50 import preprocess_input
-from keras.models import load_model
-from buildModel import *
+# from keras.models import load_model
 
-# model = load_model("RetinalDiseaseCNN.h5")
-labels = ['glaucoma','cataract','normal','diabetic_retinopathy']
-model = buildModel(len(labels))
-model.load_weights('../checkpoint/cp.ckpt')
+labels = ['cataract','diabetic_retinopathy','glaucoma','normal']
+model = keras.models.load_model("RetinalDisease4Log.h5")
 
 # load image
 def loadimage(test):
@@ -36,6 +35,5 @@ def loadimage(test):
 # predict image
 def predictimage(test):
     y_pred = model.predict(test)
-    probdf = pd.DataFrame(y_pred, columns = labels)
-    output = probdf.apply(lambda x: x*100)
-    return output.to_html()
+    print(y_pred[0])
+    return (y_pred[0]*100).round(3)

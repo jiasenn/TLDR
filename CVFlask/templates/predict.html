@@ -1,7 +1,49 @@
-<html>
-   <body>
-      {% block content %}
-      {{output | safe}}
-      {% endblock %}
-   </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/styles.css') }}">
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Project TLDR</title>
+</head>
+<body>
+   <div class="topnav">
+      <p> <b> Term 7 CV: Ocular Disease Recognition </b> </p>
+   </div> 
+   <div class="blue-box">
+    <a href="/">Back</a>
+    <div style="flex-basis: 20%; flex-grow: 1; padding: 1em;">
+        <img class="center" src="{{file}}"/> 
+    </div>
+    <div class="grid-container" style="flex-basis: 20%; flex-grow: 2;">
+        <div class="grid-item item0">
+            <b>Results</b>
+        </div>
+        <div class="grid-item item1">Glaucoma</div>
+        <div class="grid-item item2">Cataract</div>
+        <div class="grid-item item3">Diabetic Retinopathy</div>
+        <div class="grid-item item4">Normal</div>
+        <div class="grid-item bar1">
+            <div class="graph" style="width: {{output[0]}}%;">
+                <p style="font-size: 20px;"> {{output[0]}}% </p>
+            </div>
+        </div>
+        <div class="grid-item bar2">
+            <div class="graph" style="width: {{output[1]}}%;">
+                <p style="font-size: 20px;"> {{output[1]}}% </p>
+            </div>
+        </div>
+        <div class="grid-item bar3">
+            <div class="graph" style="width: {{output[2]}}%;">
+                <p style="font-size: 20px;"> {{output[2]}}% </p>
+            </div>
+        </div>
+        <div class="grid-item bar4">
+            <div class="graph" style="width: {{output[3]}}%;">
+                <p style="font-size: 20px;"> {{output[3]}}% </p>
+            </div>
+        </div>
+    </div>
+   </div>            
+</body>
 </html>
